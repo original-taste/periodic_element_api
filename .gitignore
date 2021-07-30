@@ -1,0 +1,9 @@
+node_modules/
+
+utils/
+views/
+bin/
+backup/
+public/
+sqlite3.exe
+elements.json
