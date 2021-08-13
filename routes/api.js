@@ -24,10 +24,13 @@ router.get("/all", (req, res) => {
     let sql = "select * from elements_properties";
 
     db.all(sql, (err, rows) => {
+        if(err) {
+            res.send("error occured on our side!");
+            return;
+        }
 
+        res.send(rows);
     });
-
-    res.send("working!");
 });
 
 router.get("/:property/:value", (req, res) => {
@@ -35,13 +38,13 @@ router.get("/:property/:value", (req, res) => {
 
     res.set("content-type", "application/json");
 
-    db.get(sql, (err, row) => {
+    db.all(sql, (err, rows) => {
         if(err) {
             res.send("error occured on our side: " + err);
             return;
         }
-        if(row != null){
-            res.send(row);
+        if(rows != null){
+            res.send(rows);
         }
         else {
             res.send("no such element found!");
